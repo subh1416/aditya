@@ -1052,15 +1052,15 @@
     </div>
 
     <!-- Water Connection Service Modal -->
-    <div id="waterServiceModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-7xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white z-10">
+    <div id="waterServiceModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl sm:rounded-3xl w-full max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 p-4 sm:p-6 text-white z-10">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-3">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 8.172V5L8 4z"></path>
                         </svg>
-                        <h2 class="text-3xl font-bold">Water Connection Service Hub</h2>
+                        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold">Water Connection Service Hub</h2>
                     </div>
                     <button onclick="closeWaterConnectionService()" class="text-white hover:text-gray-200 transition-colors p-2">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1071,16 +1071,16 @@
                 <p class="mt-2 opacity-90">Guided Path & Community Insights for Ward 14</p>
             </div>
 
-            <div class="p-8">
+            <div class="p-4 sm:p-6 md:p-8">
                 <!-- Tab Navigation -->
-                <div class="flex border-b border-gray-200 mb-8">
-                    <div id="tab-info" class="tab-button tab-active p-4 mr-6 cursor-pointer" onclick="showTab('info')">
+                <div class="flex flex-wrap border-b border-gray-200 mb-6 sm:mb-8 overflow-x-auto">
+                    <div id="tab-info" class="tab-button tab-active p-3 sm:p-4 mr-2 sm:mr-6 cursor-pointer text-sm sm:text-base whitespace-nowrap" onclick="showTab('info')">
                         <span class="hidden sm:inline">Official </span>Information
                     </div>
-                    <div id="tab-community" class="tab-button p-4 mr-6 cursor-pointer" onclick="showTab('community')">
+                    <div id="tab-community" class="tab-button p-3 sm:p-4 mr-2 sm:mr-6 cursor-pointer text-sm sm:text-base whitespace-nowrap" onclick="showTab('community')">
                         <span class="hidden sm:inline">Local </span>Citizen Experience
                     </div>
-                    <div id="tab-support" class="tab-button p-4 cursor-pointer" onclick="showTab('support')">
+                    <div id="tab-support" class="tab-button p-3 sm:p-4 cursor-pointer text-sm sm:text-base whitespace-nowrap" onclick="showTab('support')">
                         <span class="hidden sm:inline">Get </span>Assistance & Hire
                     </div>
                 </div>
@@ -1337,13 +1337,13 @@
             buttonEl.disabled = true;
             buttonEl.innerHTML = '<span>🔄</span><span>Analyzing...</span>';
 
-            const systemPrompt = "Act as a civic technology consultant. Analyze the provided citizen platform performance metrics and generate a concise, two-sentence executive summary that explains the overall benefit of these high scores to the average citizen.";
+            // Simulate loading time
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            const userQuery = `Current Metrics:\nService Transparency Score: 92%\nCitizen-Sourced Data Accuracy: 88%\nReduction in Manual Inquiry Time: 65%.\n\nGenerate the executive summary.`;
+            // Dummy executive summary
+            const analysis = "The exceptional performance metrics demonstrate significant improvements in citizen services. With 92% service transparency and 88% data accuracy, citizens now enjoy faster, more reliable access to municipal information, reducing bureaucratic delays by 65% and enabling informed civic participation.";
 
-            const analysis = await callGeminiAPI(userQuery, systemPrompt);
-
-            resultEl.innerHTML = analysis.replace(/\n/g, '<br>');
+            resultEl.innerHTML = analysis;
             resultEl.classList.remove('hidden');
             buttonEl.disabled = false;
             buttonEl.innerHTML = '<span>✨</span><span>Generate Executive Summary</span>';
@@ -1357,18 +1357,11 @@
             buttonEl.disabled = true;
             buttonEl.innerHTML = '<span>🔄</span><span>Analyzing...</span>';
 
-            const systemPrompt = "Act as an accountability officer. Based on the following metrics, identify and list 3 specific, prioritized areas (using numbered bullet points) where the local body must focus to raise the Grievance Resolution Rate above 90% and Community Audit Compliance above 95%. Use a formal and authoritative tone.";
+            // Simulate loading time
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            const userQuery = `Current Metrics:\nGrievance Resolution Rate: 78%\nCommunity Audit Compliance: 85%.\n\nGenerate the 3 prioritized areas for improvement.`;
-
-            const analysis = await callGeminiAPI(userQuery, systemPrompt);
-
-            let formattedAnalysis = analysis.replace(/(\d+\.\s*)/g, '<li>').replace(/(\r\n|\n|\r)/gm, '').replace(/<li>/, '<ul><li>');
-            formattedAnalysis = formattedAnalysis.endsWith('</li>') ? formattedAnalysis + '</ul>' : formattedAnalysis.replace(/<\/li>.*$/, '</ul>');
-
-            if (!formattedAnalysis.startsWith('<ul>')) {
-                formattedAnalysis = analysis.replace(/\n/g, '<br>');
-            }
+            // Dummy improvement areas
+            const formattedAnalysis = `<ul><li>Implement dedicated grievance tracking system with real-time status updates and mandatory response timelines to achieve 95%+ resolution rates within 30 days.</li><li>Establish community audit committees with trained representatives from each ward to conduct monthly compliance reviews and maintain transparent reporting mechanisms.</li><li>Deploy digital feedback platforms with automated escalation protocols to ensure critical issues reach senior officials within 48 hours for immediate resolution.</li></ul>`;
 
             resultEl.innerHTML = formattedAnalysis;
             resultEl.classList.remove('hidden');
